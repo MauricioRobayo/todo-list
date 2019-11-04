@@ -1,3 +1,3 @@
 import Todo from './js/todo';
 
-window.Todo = Todo
+window.Todo = Todo;
