@@ -1,14 +1,23 @@
+import Todo from './todo';
+import { publish } from './messager';
+
 /* eslint-disable no-underscore-dangle */
 export default class Project {
-  constructor({ name }) {
+  constructor({ name } = { name: 'default' }) {
     this.name = name;
     this.todos = {};
     this.count = 0;
   }
 
+  createTodo(attr) {
+    return this.addTodo(new Todo(attr));
+  }
+
   addTodo(todo) {
     this.todos[todo.id] = todo;
     this.count += 1;
+    publish('changed', { subject: this });
+    return todo;
   }
 
   removeTodo(id) {

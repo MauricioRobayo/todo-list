@@ -1,22 +1,28 @@
 /* eslint-disable no-underscore-dangle */
 import DomTodo from './dom-todo';
+import { subscribe } from './messager';
 
 export default class DomProject {
   constructor() {
-    this.project = null;
+    this._project = null;
     this.domTodos = [];
     this.element = document.createElement('div');
     this.header = document.createElement('h2');
     this.todosContainer = document.createElement('div');
+    this.element.append(this.header, this.todosContainer);
+  }
+
+  appendTo(container) {
+    container.append(this.element);
   }
 
   createTodo() {
     const node = new DomTodo();
     this.domTodos.push(node);
-    this.todosContainer.append(node);
+    node.appendTo(this.todosContainer);
   }
 
-  fillTodos() {
+  updateTodos() {
     let index = 0;
     this._project.forEach((todo) => {
       if (index >= this.domTodos.length) {
@@ -35,7 +41,11 @@ export default class DomProject {
     this._project = prj;
     if (prj) {
       this.header.textContent = prj.name;
-      this.fillTodos();
+      subscribe('changed', `dom-${prj.name}`, (id, message) => {
+        if (message.subject === this._project) {
+          this.updateTodos();
+        }
+      });
     }
   }
 }

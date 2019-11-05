@@ -10,7 +10,7 @@ export default class DomTodo {
     this.element.append(this.title, this.description, this.dueDate, this.priority);
   }
 
-  append(container) {
+  appendTo(container) {
     container.append(this.element);
   }
 
@@ -18,7 +18,7 @@ export default class DomTodo {
     this.displayId = todo.id;
     this.title.textContent = todo.title;
     this.description.textContent = todo.description;
-    this.dueDate.textContent = todo.dueDate.toLocaleDateStr();
+    this.dueDate.textContent = todo.dueDate ? todo.dueDate.toLocaleDateString() : 'No date';
     this.priority.textContent = todo.priority;
     this.element.classList.remove('hide');
   }
