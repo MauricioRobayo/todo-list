@@ -1,9 +1,9 @@
-import { publish, subscribe } from './messager';
+import * as messager from './messager';
 
 function loadProject(event) {
   if (event.target.tagName === 'LI') {
     const { projectName } = event.target.dataset;
-    publish('switched-project', { projectName });
+    messager.postSwitchProject(projectName);
   }
 }
 
@@ -16,7 +16,7 @@ function createListElement(key) {
 
 export default function setupProjectsList(projects) {
   const ul = document.querySelector('#projects-list');
-  subscribe('create-project', 'project-list', (id, { projectName }) => {
+  messager.subscribeCreateProject('project-list', (id, { projectName }) => {
     const li = createListElement(projectName);
     ul.append(li);
   });
@@ -28,5 +28,6 @@ export default function setupProjectsList(projects) {
   ul.append(fragment);
   ul.addEventListener('click', loadProject);
   const [projectName] = Object.keys(projects);
-  publish('switched-project', { projectName });
+  // publish('switched-project', { projectName });
+  messager.postSwitchProject(projectName);
 }

@@ -1,6 +1,6 @@
 import Project from './project';
 import DomProject from './dom-project';
-import { subscribe, publish } from './messager';
+import * as messager from './messager';
 import setupForms from './forms-manager';
 import setupProjectsList from './projects-list';
 
@@ -12,22 +12,28 @@ let activeProject = DEFAULT_PROJECT_NAME;
 
 export default function runApp() {
   domProject.appendTo(document.querySelector('#project-container'));
-  subscribe('create-project', 'main', (id, message) => {
+
+  messager.subscribeCreateProject('main', (id, message) => {
     const { projectName: name } = message;
     const newProject = new Project({ name });
     projects[name] = newProject;
     domProject.project = newProject;
-    publish('changed', { subject: newProject });
+    // publish('changed', { subject: newProject });
+    messager.postChanged(newProject);
     activeProject = name;
   });
-  subscribe('switched-project', 'main', (id, { projectName }) => {
+
+  messager.subscribeSwitchProject('main', (id, { projectName }) => {
     domProject.project = projects[projectName];
-    publish('changed', { subject: projects[projectName] });
+    // publish('changed', { subject: projects[projectName] });
+    messager.postChanged(projects[projectName]);
     activeProject = projectName;
   });
-  subscribe('create-todo', 'main', (id, message) => {
+
+  messager.subscribeCreateTodo('main', (id, message) => {
     projects[activeProject].createTodo(message);
   });
+
   setupForms();
   setupProjectsList(projects);
 }

@@ -1,5 +1,5 @@
 import Todo from './todo';
-import { publish } from './messager';
+import * as messager from './messager';
 
 /* eslint-disable no-underscore-dangle */
 export default class Project {
@@ -16,7 +16,8 @@ export default class Project {
   addTodo(todo) {
     this.todos[todo.id] = todo;
     this.count += 1;
-    publish('changed', { subject: this });
+    // publish('changed', { subject: this });
+    messager.postChanged(this);
     return todo;
   }
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import DomTodo from './dom-todo';
-import { subscribe } from './messager';
+import * as messager from './messager';
 
 export default class DomProject {
   constructor() {
@@ -10,7 +10,7 @@ export default class DomProject {
     this.header = document.createElement('h2');
     this.todosContainer = document.createElement('div');
     this.element.append(this.header, this.todosContainer);
-    subscribe('changed', 'dom-project', (id, message) => {
+    messager.subscribeChanged('dom-project', (id, message) => {
       if (message.subject === this._project) {
         this.updateTodos();
       }

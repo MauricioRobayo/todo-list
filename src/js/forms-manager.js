@@ -1,10 +1,11 @@
-import { publish } from './messager';
+import * as messager from './messager';
 
 function createProject(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const projectName = formData.get('project-name');
-  publish('create-project', { projectName });
+  // publish('create-project', { projectName });
+  messager.postCreateProject(projectName);
 }
 
 function createTodo(event) {
@@ -14,7 +15,8 @@ function createTodo(event) {
   const description = formData.get('todo-description');
   const dueDate = formData.get('todo-due-date');
   const priority = formData.get('todo-priority');
-  publish('create-todo', {
+  // publish('create-todo', {
+  messager.postCreateTodo({
     title,
     description,
     dueDate,

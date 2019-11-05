@@ -1,20 +1,25 @@
 
 const subscribers = {};
 
-export function subscribe(topic, id, callback) {
+const CHANGED_TOPIC = 'changed';
+const CREATE_PROJECT_TOPIC = 'create-project';
+const CREATE_TODO_TOPIC = 'create-todo';
+const SWITCH_PROJECT_TOPIC = 'switched-project';
+
+function subscribe(topic, id, callback) {
   if (!subscribers[topic]) {
     subscribers[topic] = {};
   }
   subscribers[topic][id] = callback;
 }
 
-export function unsubscribe(topic, id) {
+function unsubscribe(topic, id) {
   if (subscribers[topic]) {
     delete subscribers[topic][id];
   }
 }
 
-export function publish(topic, message) {
+function publish(topic, message) {
   if (subscribers[topic]) {
     const followers = subscribers[topic];
     Object.keys(followers).forEach((id) => {
@@ -28,3 +33,56 @@ export function publish(topic, message) {
     });
   }
 }
+
+function subscribeChanged(id, callback) {
+  subscribe(CHANGED_TOPIC, id, callback);
+}
+
+function postChanged(subject) {
+  publish(CHANGED_TOPIC, { subject });
+}
+
+function subscribeCreateProject(id, callback) {
+  subscribe(CREATE_PROJECT_TOPIC, id, callback);
+}
+
+function postCreateProject(projectName) {
+  publish(CREATE_PROJECT_TOPIC, { projectName });
+}
+
+function subscribeCreateTodo(id, callback) {
+  subscribe(CREATE_TODO_TOPIC, id, callback);
+}
+
+function postCreateTodo(properties) {
+  publish(CREATE_TODO_TOPIC, properties);
+}
+
+function subscribeSwitchProject(id, callback) {
+  subscribe(SWITCH_PROJECT_TOPIC, id, callback);
+}
+
+function postSwitchProject(projectName) {
+  publish(SWITCH_PROJECT_TOPIC, { projectName });
+}
+
+export {
+  CHANGED_TOPIC,
+  CREATE_PROJECT_TOPIC,
+  CREATE_TODO_TOPIC,
+  SWITCH_PROJECT_TOPIC,
+
+  unsubscribe,
+
+  subscribeChanged,
+  postChanged,
+
+  subscribeCreateProject,
+  postCreateProject,
+
+  subscribeCreateTodo,
+  postCreateTodo,
+
+  subscribeSwitchProject,
+  postSwitchProject,
+};
