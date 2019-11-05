@@ -9,24 +9,29 @@
 </head>
 
 <body>
-  <h1>Todo list app</h1>
-  <main id="project-container">
-    <form id="create-project">
-      <label for="project-name">Project name:</label>
-      <input type="text" name="project-name">
-      <input type="submit" value="Create project">
-    </form>
-    <form id="create-todo">
-      <label for="todo-title">Title</label>
-      <input name="todo-title" type="text">
-      <label for="todo-description">Description</label>
-      <input name="todo-description" type="text">
-      <label for="todo-due-date">Due date</label>
-      <input name="todo-due" type="text">
-      <label for="todo-priority">Priority</label>
-      <input name="todo-priority" type="text">
-      <input type="submit" value="Create todo">
-    </form>
+  <header>
+    <h1>Todo list app</h1>
+  </header>
+  <main>
+    <section id="forms-container">
+      <form id="create-project">
+        <label for="project-name">Project name:</label>
+        <input type="text" name="project-name">
+        <input type="submit" value="Create project">
+      </form>
+      <form id="create-todo">
+        <label for="todo-title">Title</label>
+        <input name="todo-title" type="text">
+        <label for="todo-description">Description</label>
+        <input name="todo-description" type="text">
+        <label for="todo-due-date">Due date</label>
+        <input name="todo-due" type="text">
+        <label for="todo-priority">Priority</label>
+        <input name="todo-priority" type="text">
+        <input type="submit" value="Create todo">
+      </form>
+    </section>
+    <section id="project-container"></section>
   </main>
 </body>
 

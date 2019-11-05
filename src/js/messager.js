@@ -17,6 +17,14 @@ export function unsubscribe(topic, id) {
 export function publish(topic, message) {
   if (subscribers[topic]) {
     const followers = subscribers[topic];
-    Object.keys(followers).forEach((id) => followers[id](id, message));
+    Object.keys(followers).forEach((id) => {
+      // eslint-disable-next-line no-console
+      console.log('Messager-Publish:', {
+        topic,
+        id,
+        message: JSON.stringify(message),
+      });
+      followers[id](id, message);
+    });
   }
 }

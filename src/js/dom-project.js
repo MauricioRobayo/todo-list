@@ -41,7 +41,7 @@ export default class DomProject {
     this._project = prj;
     if (prj) {
       this.header.textContent = prj.name;
-      subscribe('changed', `dom-${prj.name}`, (id, message) => {
+      subscribe('changed', 'dom-project', (id, message) => {
         if (message.subject === this._project) {
           this.updateTodos();
         }
