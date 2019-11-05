@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Todo list</title>
-  </head>
-  <body>
-    <h1>Todo list app</h1>
-    <main id='project-container'>
-    </main>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Todo list</title>
+</head>
+
+<body>
+  <h1>Todo list app</h1>
+  <main id="project-container">
+    <form id="create-project">
+      <label for="project-name">Project name:</label>
+      <input type="text" name="project-name">
+      <input type="submit" value="Create project">
+    </form>
+    <form id="create-todo">
+      <label for="todo-title">Title</label>
+      <input name="todo-title" type="text">
+      <label for="todo-description">Description</label>
+      <input name="todo-description" type="text">
+      <label for="todo-due-date">Due date</label>
+      <input name="todo-due" type="text">
+      <label for="todo-priority">Priority</label>
+      <input name="todo-priority" type="text">
+      <input type="submit" value="Create todo">
+    </form>
+  </main>
+</body>
+
 </html>
