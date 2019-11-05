@@ -4,8 +4,6 @@ function createProject(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const projectName = formData.get('project-name');
-  // projects[projectName] = new Project(projectName);
-  // activeProject = projectName;
   publish('create-project', { projectName });
 }
 
@@ -22,12 +20,6 @@ function createTodo(event) {
     dueDate,
     priority,
   });
-  // projects[activeProject].createTodo({
-  //   title,
-  //   description,
-  //   dueDate,
-  //   priority,
-  // });
 }
 function setupProject() {
   const createProjectElem = document.querySelector('#create-project');

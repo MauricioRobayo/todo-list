@@ -10,6 +10,11 @@ export default class DomProject {
     this.header = document.createElement('h2');
     this.todosContainer = document.createElement('div');
     this.element.append(this.header, this.todosContainer);
+    subscribe('changed', 'dom-project', (id, message) => {
+      if (message.subject === this._project) {
+        this.updateTodos();
+      }
+    });
   }
 
   appendTo(container) {
@@ -23,6 +28,9 @@ export default class DomProject {
   }
 
   updateTodos() {
+    if (!this._project) {
+      return;
+    }
     let index = 0;
     this._project.forEach((todo) => {
       if (index >= this.domTodos.length) {
@@ -35,17 +43,10 @@ export default class DomProject {
       this.domTodos[index].hide();
       index += 1;
     }
+    this.header.textContent = this._project.name;
   }
 
   set project(prj) {
     this._project = prj;
-    if (prj) {
-      this.header.textContent = prj.name;
-      subscribe('changed', 'dom-project', (id, message) => {
-        if (message.subject === this._project) {
-          this.updateTodos();
-        }
-      });
-    }
   }
 }
