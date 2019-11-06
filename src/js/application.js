@@ -62,6 +62,7 @@ function getProjectsFromLocalStorage() {
   projectsKeys.forEach((projectKey) => {
     const projectName = projectKey.replace('osma-tlp-', '');
     projects[projectName] = Project.getFromLocalStorage(projectName);
+    messager.postCreateProject(projectName);
   });
   messager.postSwitchProject(activeProject);
 }
@@ -71,6 +72,6 @@ export default function runApp() {
   domProject.appendTo(document.querySelector('#project-container'));
   setupForms();
   setupProjectsList(projects);
-  messager.postCreateProject(DEFAULT_PROJECT_NAME);
   getProjectsFromLocalStorage();
+  messager.postCreateProject(DEFAULT_PROJECT_NAME);
 }
