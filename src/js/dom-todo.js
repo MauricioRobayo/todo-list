@@ -1,7 +1,8 @@
 import * as messager from './messager';
 
 const TODAY = new Date();
-const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
+const rtf = new Intl.RelativeTimeFormat({ localeMatcher: 'best fit', style: 'long', numeric: 'auto' });
+const dtf = new Intl.DateTimeFormat();
 
 function daysLeft(date) {
   return Math.ceil((date - TODAY) / (1000 * 3600 * 24));
@@ -9,7 +10,7 @@ function daysLeft(date) {
 
 function formatDueDate(todo) {
   if (todo.dueDate) {
-    return `${todo.dueDate.toDateString()} (${rtf1.format(daysLeft(todo.dueDate), 'days')})`;
+    return `${dtf.format(todo.dueDate)} (${rtf.format(daysLeft(todo.dueDate), 'days')})`;
   }
   return 'No date';
 }
