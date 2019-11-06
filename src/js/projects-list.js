@@ -1,5 +1,7 @@
 import * as messager from './messager';
 
+const projectsList = [];
+
 function loadProject(event) {
   if (event.target.tagName === 'LI') {
     const { projectName } = event.target.dataset;
@@ -17,6 +19,10 @@ function createListElement(key) {
 export default function setupProjectsList(projects) {
   const ul = document.querySelector('#projects-list');
   messager.subscribeCreateProject('project-list', (id, { projectName }) => {
+    if (projectsList.includes(projectName)) {
+      return;
+    }
+    projectsList.push(projectName);
     const li = createListElement(projectName);
     ul.append(li);
   });

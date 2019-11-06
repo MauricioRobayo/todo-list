@@ -30,10 +30,10 @@ export default class Todo {
   get json() {
     return JSON.stringify({
       title: this._title,
-      description: this._description,
-      dueDate: this._dueDate,
-      priority: this._priority,
-      completed: this._completed,
+      description: this.description,
+      dueDate: this.dueDate,
+      priority: this.priority,
+      completed: this.completed,
     });
   }
 

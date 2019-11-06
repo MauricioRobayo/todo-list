@@ -8,10 +8,14 @@ const DEFAULT_PROJECT_NAME = 'default';
 const APPLICATION_ID = 'main';
 
 const domProject = new DomProject();
-const projects = { default: new Project({ name: DEFAULT_PROJECT_NAME }) };
+const projects = {};
 let activeProject = DEFAULT_PROJECT_NAME;
 
 function createProject(id, { projectName: name }) {
+  if (projects[name]) {
+    messager.postSwitchProject(name);
+    return;
+  }
   const newProject = new Project({ name });
   projects[name] = newProject;
   domProject.project = newProject;
@@ -21,7 +25,6 @@ function createProject(id, { projectName: name }) {
 
 function switchProject(id, { projectName }) {
   domProject.project = projects[projectName];
-  // publish('changed', { subject: projects[projectName] });
   messager.postChanged(projects[projectName]);
   activeProject = projectName;
 }
@@ -53,9 +56,21 @@ function createSubscriptions() {
   messager.subscribeUpdateTodo(APPLICATION_ID, updateTodo);
 }
 
+function getProjectsFromLocalStorage() {
+  const localData = { ...localStorage };
+  const projectsKeys = Object.keys(localData).filter((key) => key.startsWith('osma-tlp-'));
+  projectsKeys.forEach((projectKey) => {
+    const projectName = projectKey.replace('osma-tlp-', '');
+    projects[projectName] = Project.getFromLocalStorage(projectName);
+  });
+  messager.postSwitchProject(activeProject);
+}
+
 export default function runApp() {
-  domProject.appendTo(document.querySelector('#project-container'));
   createSubscriptions();
+  domProject.appendTo(document.querySelector('#project-container'));
   setupForms();
   setupProjectsList(projects);
+  messager.postCreateProject(DEFAULT_PROJECT_NAME);
+  getProjectsFromLocalStorage();
 }

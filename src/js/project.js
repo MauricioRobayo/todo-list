@@ -7,6 +7,25 @@ export default class Project {
     this.name = name;
     this.todos = {};
     this.count = 0;
+    messager.subscribeChanged(this.name, (id, { subject }) => {
+      if (subject === this) {
+        this.saveToLocalStorage();
+      }
+    });
+  }
+
+  saveToLocalStorage() {
+    localStorage[`osma-tlp-${this.name}`] = this.count ? JSON.stringify(Object.values(this.todos).map((todo) => todo.json)) : '[]';
+  }
+
+  static getFromLocalStorage(projectName) {
+    const project = new Project({ name: projectName });
+    const todos = JSON.parse(localStorage[`osma-tlp-${projectName}`]);
+    todos.forEach((todo) => {
+      project.createTodo(JSON.parse(todo));
+    });
+    project.count = todos.length;
+    return project;
   }
 
   createTodo(attr) {
@@ -16,7 +35,6 @@ export default class Project {
   addTodo(todo) {
     this.todos[todo.id] = todo;
     this.count += 1;
-    // publish('changed', { subject: this });
     messager.postChanged(this);
     return todo;
   }
