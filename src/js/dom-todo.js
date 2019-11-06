@@ -24,6 +24,8 @@ export default class DomTodo {
     this.dueDate = document.createElement('time');
     this.priority = document.createElement('div');
     this.priority.className = 'priority';
+    this.completed = document.createElement('input');
+    this.completed.type = 'checkbox';
     this.deleteBtn = document.createElement('button');
     this.deleteBtn.className = 'delete-btn';
     this.deleteBtn.textContent = 'Delete';
@@ -35,6 +37,7 @@ export default class DomTodo {
       this.description,
       this.dueDate,
       this.priority,
+      this.completed,
       this.editBtn,
       this.deleteBtn,
     );
@@ -56,8 +59,8 @@ export default class DomTodo {
     this.displayId = todo.id;
     this.title.textContent = todo.title;
     this.description.textContent = todo.description;
-    // this.dueDate.textContent = todo.dueDate ? todo.dueDate.toLocaleDateString() : 'No date';
     this.dueDate.textContent = formatDueDate(todo);
+    this.completed.checked = todo.completed;
     this.priority.textContent = todo.priority;
     this.element.classList.remove('hide');
   }

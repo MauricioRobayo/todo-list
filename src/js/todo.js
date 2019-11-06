@@ -14,11 +14,13 @@ export default class Todo {
     description = '',
     dueDate = null,
     priority = 0,
+    completed = false,
   }) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.completed = completed;
   }
 
   isDue() {
@@ -31,11 +33,20 @@ export default class Todo {
       description: this._description,
       dueDate: this._dueDate,
       priority: this._priority,
+      completed: this._completed,
     });
   }
 
   static fromJSON(json) {
     return new Todo(JSON.parse(json));
+  }
+
+  set completed(status) {
+    this._completed = status;
+  }
+
+  get completed() {
+    return this._completed;
   }
 
   set title(newTitle) {

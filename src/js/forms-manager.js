@@ -15,11 +15,13 @@ function createTodo(event) {
   const description = formData.get('todo-description');
   const dueDate = formData.get('todo-due-date');
   const priority = formData.get('todo-priority');
+  const completed = formData.get('todo-completed') === 'on';
   messager.postCreateTodo({
     title,
     description,
     dueDate,
     priority,
+    completed,
   });
 }
 
@@ -63,6 +65,7 @@ function fillEditForm(todo) {
   setInputValue('edit-id', todo.id);
   setInputValue('edit-title', todo.title);
   setInputValue('edit-description', todo.description);
+  document.querySelector('#edit-completed').checked = true;
   document.getElementById('edit-due-date').valueAsDate = todo.dueDate;
   setInputValue('edit-priority', todo.priority);
 }
