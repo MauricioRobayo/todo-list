@@ -3,7 +3,13 @@ const priorities = ['low', 'medium', 'high'];
 let sequentialId = 0;
 
 export default class Todo {
-  constructor({
+  constructor(values) {
+    this.update(values);
+    this.id = sequentialId;
+    sequentialId += 1;
+  }
+
+  update({
     title,
     description = '',
     dueDate = null,
@@ -13,8 +19,6 @@ export default class Todo {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.id = sequentialId;
-    sequentialId += 1;
   }
 
   isDue() {
@@ -54,7 +58,7 @@ export default class Todo {
   }
 
   set dueDate(newDueDate) {
-    this._dueDate = newDueDate ? new Date(newDueDate) : null;
+    this._dueDate = newDueDate ? new Date(newDueDate.replace(/-/g, '/')) : null;
   }
 
   get dueDate() {
@@ -62,8 +66,9 @@ export default class Todo {
   }
 
   set priority(newPriority) {
-    this._priority = priorities.includes(newPriority)
-      ? priorities.indexOf(newPriority)
+    const value = newPriority.toLowerCase();
+    this._priority = priorities.includes(value)
+      ? priorities.indexOf(value)
       : 0;
   }
 

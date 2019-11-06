@@ -26,6 +26,10 @@ export default class Project {
     this.count -= 1;
   }
 
+  findById(id) {
+    return this.todos[id];
+  }
+
   forEach(fn) {
     Object.values(this.todos).forEach(fn);
   }
