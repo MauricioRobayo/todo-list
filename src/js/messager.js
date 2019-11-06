@@ -1,10 +1,12 @@
-
 const subscribers = {};
 
 const CHANGED_TOPIC = 'changed';
 const CREATE_PROJECT_TOPIC = 'create-project';
 const CREATE_TODO_TOPIC = 'create-todo';
+const UPDATE_TODO_TOPIC = 'update-todo';
 const SWITCH_PROJECT_TOPIC = 'switched-project';
+const DELETE_TODO_TOPIC = 'delete-todo';
+const EDIT_TODO_TOPIC = 'edit-todo';
 
 function subscribe(topic, id, callback) {
   if (!subscribers[topic]) {
@@ -58,12 +60,36 @@ function postCreateTodo(properties) {
   publish(CREATE_TODO_TOPIC, properties);
 }
 
+function subscribeUpdateTodo(id, callback) {
+  subscribe(UPDATE_TODO_TOPIC, id, callback);
+}
+
+function postUpdateTodo(properties) {
+  publish(UPDATE_TODO_TOPIC, properties);
+}
+
 function subscribeSwitchProject(id, callback) {
   subscribe(SWITCH_PROJECT_TOPIC, id, callback);
 }
 
 function postSwitchProject(projectName) {
   publish(SWITCH_PROJECT_TOPIC, { projectName });
+}
+
+function subscribeDeleteTodo(id, callback) {
+  subscribe(DELETE_TODO_TOPIC, id, callback);
+}
+
+function postDeleteTodo(todoId) {
+  publish(DELETE_TODO_TOPIC, { todoId });
+}
+
+function subscribeEditTodo(id, callback) {
+  subscribe(EDIT_TODO_TOPIC, id, callback);
+}
+
+function postEditTodo(todoId) {
+  publish(EDIT_TODO_TOPIC, { todoId });
 }
 
 export {
@@ -83,6 +109,16 @@ export {
   subscribeCreateTodo,
   postCreateTodo,
 
+  subscribeUpdateTodo,
+  postUpdateTodo,
+
   subscribeSwitchProject,
   postSwitchProject,
+
+  subscribeDeleteTodo,
+  postDeleteTodo,
+
+  subscribeEditTodo,
+  postEditTodo,
+
 };
