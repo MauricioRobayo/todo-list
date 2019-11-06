@@ -14,15 +14,19 @@
   </header>
   <main>
     <section>
+      <div class="section-header">Projects</div>
       <ul id="projects-list">
       </ul>
     </section>
-    <section id="forms-container">
+    <section>
       <form id="create-project">
-        <label for="project-name">Project name:</label>
-        <input type="text" name="project-name">
+        <label for="project-name" class="section-header">Create a new project</label>
+        <input type="text" name="project-name" placeholder="Project name">
         <input type="submit" value="Create project">
       </form>
+    </section>
+    <section id="forms-container">
+      <div class="section-header">Add a new task</div>
       <form id="create-todo">
         <label for="todo-title">Title</label>
         <input name="todo-title" type="text">
@@ -32,11 +36,13 @@
         <input name="todo-due-date" type="date">
         <label for="todo-priority">Priority</label>
         <input name="todo-priority" type="text">
-        <label for="todo-completed">Completed</label>
-        <input name="todo-completed" type="checkbox">
+        <div>
+          <label for="todo-completed">Completed</label>
+          <input name="todo-completed" type="checkbox">
+        </div>
         <input type="submit" value="Create todo">
       </form>
-      <form id="edit-todo">
+      <form id="edit-todo" class="hide">
         <input name="todo-id" id="edit-id" type="hidden">
         <label for="todo-title">Edit Title</label>
         <input name="todo-title" id="edit-title" type="text">

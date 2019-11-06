@@ -19,6 +19,7 @@ export default class DomTodo {
   constructor() {
     this.displayId = -1;
     this.element = document.createElement('div');
+    this.element.classList.add('todo-container');
     this.title = document.createElement('h3');
     this.description = document.createElement('p');
     this.dueDate = document.createElement('time');

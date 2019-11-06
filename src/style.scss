@@ -1,3 +1,93 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #003f5c;
+  color: white;
+  font-size: 16px;
+}
+
+header {
+  text-align: center;
+  h1 {
+    margin: 1rem auto;
+  }
+}
+
+section {
+  padding: 0.5rem;
+  background-color: #dfddc7;
+  color: #444;
+  border-radius: 0.25rem;
+  margin: 1rem;
+  .section-header {
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  input {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin: 0.25rem 0 0.75rem 0;
+    border: none;
+  }
+  input[type=submit] {
+    background-color: #94aa2a;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+  }
+  input[type=submit]:hover {
+    filter: brightness(1.05);
+  }
+}
+
+main {
+  max-width: 620px;
+  margin: 1rem auto;
+}
 .hide {
   display: none;
+}
+
+#projects-list {
+  margin: 1rem 0;
+  padding: 0;
+  li {
+    display: inline-block;
+    margin: 0.25rem;
+    width: auto;
+    list-style: none;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    text-transform: capitalize;
+    background-color: #ff6768;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+  }
+  li:hover {
+    filter: brightness(1.25);
+  }
+}
+
+#project-container {
+  div {
+    h2 {
+      text-transform: capitalize;
+      &:before {
+        content: "Project:";
+        margin-right: 0.25rem;
+      }
+    }
+  }
+  .todo-container {
+    h3 {
+    }
+  }
 }
