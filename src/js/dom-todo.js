@@ -1,5 +1,19 @@
 import * as messager from './messager';
 
+const TODAY = new Date();
+const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
+
+function daysLeft(date) {
+  return Math.ceil((date - TODAY) / (1000 * 3600 * 24));
+}
+
+function formatDueDate(todo) {
+  if (todo.dueDate) {
+    return `${todo.dueDate.toDateString()} (${rtf1.format(daysLeft(todo.dueDate), 'days')})`;
+  }
+  return 'No date';
+}
+
 export default class DomTodo {
   constructor() {
     this.displayId = -1;
@@ -41,7 +55,8 @@ export default class DomTodo {
     this.displayId = todo.id;
     this.title.textContent = todo.title;
     this.description.textContent = todo.description;
-    this.dueDate.textContent = todo.dueDate ? todo.dueDate.toLocaleDateString() : 'No date';
+    // this.dueDate.textContent = todo.dueDate ? todo.dueDate.toLocaleDateString() : 'No date';
+    this.dueDate.textContent = formatDueDate(todo);
     this.priority.textContent = todo.priority;
     this.element.classList.remove('hide');
   }
