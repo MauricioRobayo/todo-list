@@ -1,4 +1,4 @@
-import { toggleClass, PRIORITIES } from './globals';
+import { toggleClass, createElement, PRIORITIES } from './globals';
 import * as messager from './messager';
 
 const TODAY = new Date();
@@ -19,23 +19,21 @@ function formatDueDate(todo) {
 export default class DomTodo {
   constructor() {
     this.displayId = -1;
-    this.element = document.createElement('details');
-    this.element.classList.add('todo-container');
-    this.summary = document.createElement('summary');
-    this.details = document.createElement('div');
-    this.details.classList.add('details');
-    this.title = document.createElement('h3');
-    this.description = document.createElement('p');
-    this.dueDate = document.createElement('time');
-    this.priority = document.createElement('div');
-    this.priority.className = 'priority';
-    this.completed = document.createElement('input');
-    this.completed.type = 'checkbox';
-    this.deleteBtn = document.createElement('button');
-    this.deleteBtn.className = 'delete-btn';
-    this.editBtn = document.createElement('button');
-    this.editBtn.className = 'edit-btn';
-    this.summary.append(this.completed, this.title);
+    this.element = createElement('details', { classList: ['todo-container'] });
+    this.summary = createElement('summary');
+    this.details = createElement('div', { classList: ['details'] });
+    this.title = createElement('h3');
+    this.description = createElement('p');
+    this.dueDate = createElement('time');
+    this.priority = createElement('div', { className: 'priority' });
+    this.completed = createElement('input', { type: 'checkbox' });
+    this.deleteBtn = createElement('button', { className: 'delete-btn' });
+    this.editBtn = createElement('button', { className: 'edit-btn' });
+
+    this.summary.append(
+      this.completed,
+      this.title,
+    );
     this.details.append(
       this.description,
       this.dueDate,
@@ -55,6 +53,14 @@ export default class DomTodo {
     this.editBtn.addEventListener('click', () => {
       messager.postEditTodo(this.displayId);
     });
+
+    this.completed.addEventListener('click', (event) => {
+      messager.postUpdateTodo({
+        todoId: this.displayId,
+        completed: event.target.checked,
+      });
+    });
+
   }
 
   appendTo(container) {
