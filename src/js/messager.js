@@ -26,11 +26,14 @@ function publish(topic, message) {
     const followers = subscribers[topic];
     Object.keys(followers).forEach((id) => {
       // eslint-disable-next-line no-console
-      console.log('Messager-Publish:', {
-        topic,
-        id,
-        message: JSON.stringify(message),
-      });
+
+      // For messaging debugging purposes
+
+      // console.log('Messager-Publish:', {
+      //   topic,
+      //   id,
+      //   message: JSON.stringify(message),
+      // });
       followers[id](id, message);
     });
   }
