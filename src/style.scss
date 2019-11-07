@@ -30,7 +30,7 @@ section {
 form {
   display: flex;
   flex-direction: column;
-  input {
+  input, select {
     padding: 0.5rem;
     border-radius: 0.5rem;
     margin: 0.25rem 0 0.75rem 0;
