@@ -58,6 +58,7 @@ main {
 #projects-list {
   margin: 1rem 0;
   padding: 0;
+  margin: 0 -0.25rem;
   li {
     display: inline-block;
     margin: 0.25rem;
@@ -76,8 +77,22 @@ main {
   }
 }
 
+summary {
+  padding: 0.5rem 0;
+}
+
+.high {
+  background-color: #c70039;
+}
+.medium {
+  background-color: #ff6c00;
+}
+.low {
+  background-color: #00818a;
+}
+
 #project-container {
-  div {
+  & > div {
     h2 {
       text-transform: capitalize;
       &:before {
@@ -87,7 +102,83 @@ main {
     }
   }
   .todo-container {
-    h3 {
+    margin: 0.5rem;
+    summary {
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      border-radius: 4px;
+      color: white;
+      &:hover {
+        filter: brightness(1.25);
+      }
+      & > input[type=checkbox] {
+        margin-right: .5rem;
+      }
+      & > h3 {
+        font-weight: normal;
+        cursor: pointer;
+        margin: 0;
+        display: inline-block;
+      }
+    }
+    .details {
+      position: relative;
+      background-color: white;
+      padding: 0.5rem;
+      display: grid;
+      grid-template-rows: 1fr 32px;
+      grid-template-columns: 1fr 32px 32px;
+      grid-template-areas:
+          "description description description"
+          "date edit delete";
+      align-items: end;
+      grid-gap: 1rem;
+      p {
+        grid-area: description;
+      }
+      time {
+        grid-area: date;
+        font-size: 0.85rem;
+        color: gray;
+        &:before {
+          content: '\1F4C5';
+          margin-right: .25rem;
+        }
+      }
+      .priority {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.25rem 0.15rem 0.25rem;
+        border-radius: 2px;
+      }
+      button {
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        border: none;
+        font-size: 1.15rem;
+        padding: 0.15rem;
+        cursor: pointer;
+        &.edit-btn {
+          background-color: green;
+          color: white;
+          grid-area: edit;
+          &:before {
+            content: '\270E';
+          }
+        }
+        &.delete-btn {
+          color: white;
+          background-color: red;
+          grid-area: delete;
+          &:before {
+            content: '⌫';
+          }
+        }
+      }
     }
   }
 }

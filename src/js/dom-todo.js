@@ -18,8 +18,11 @@ function formatDueDate(todo) {
 export default class DomTodo {
   constructor() {
     this.displayId = -1;
-    this.element = document.createElement('div');
+    this.element = document.createElement('details');
     this.element.classList.add('todo-container');
+    this.summary = document.createElement('summary');
+    this.details = document.createElement('div');
+    this.details.classList.add('details');
     this.title = document.createElement('h3');
     this.description = document.createElement('p');
     this.dueDate = document.createElement('time');
@@ -29,18 +32,21 @@ export default class DomTodo {
     this.completed.type = 'checkbox';
     this.deleteBtn = document.createElement('button');
     this.deleteBtn.className = 'delete-btn';
-    this.deleteBtn.textContent = 'Delete';
+    // this.deleteBtn.textContent = 'Delete';
     this.editBtn = document.createElement('button');
     this.editBtn.className = 'edit-btn';
-    this.editBtn.textContent = 'Edit';
-    this.element.append(
-      this.title,
+    // this.editBtn.textContent = 'Edit';
+    this.summary.append(this.completed, this.title);
+    this.details.append(
       this.description,
       this.dueDate,
       this.priority,
-      this.completed,
-      this.editBtn,
       this.deleteBtn,
+      this.editBtn,
+    );
+    this.element.append(
+      this.summary,
+      this.details,
     );
 
     this.deleteBtn.addEventListener('click', () => {
@@ -58,11 +64,13 @@ export default class DomTodo {
 
   display(todo) {
     this.displayId = todo.id;
+    this.summary.classList.add(todo.priority);
     this.title.textContent = todo.title;
+    this.completed.checked = todo.completed;
     this.description.textContent = todo.description;
     this.dueDate.textContent = formatDueDate(todo);
-    this.completed.checked = todo.completed;
     this.priority.textContent = todo.priority;
+    this.priority.classList.add(todo.priority);
     this.element.classList.remove('hide');
   }
 

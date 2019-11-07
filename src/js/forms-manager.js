@@ -65,7 +65,7 @@ function fillEditForm(todo) {
   setInputValue('edit-id', todo.id);
   setInputValue('edit-title', todo.title);
   setInputValue('edit-description', todo.description);
-  document.querySelector('#edit-completed').checked = true;
+  document.querySelector('#edit-completed').checked = todo.completed;
   document.getElementById('edit-due-date').valueAsDate = todo.dueDate;
   setInputValue('edit-priority', todo.priority);
 }

@@ -11,6 +11,17 @@ const domProject = new DomProject();
 const projects = {};
 let activeProject = DEFAULT_PROJECT_NAME;
 
+function setOpenAttribute(querySelector, state) {
+  document.querySelector(querySelector).open = state;
+}
+
+function hideElement(querySelector) {
+  document.querySelector(querySelector).classList.add('hide');
+}
+function showElement(querySelector) {
+  document.querySelector(querySelector).classList.remove('hide');
+}
+
 function createProject(id, { projectName: name }) {
   if (projects[name]) {
     messager.postSwitchProject(name);
@@ -40,11 +51,17 @@ function deleteTodo(id, { todoId }) {
 
 function editTodo(id, { todoId }) {
   fillEditForm(projects[activeProject].findById(todoId));
+  hideElement('#create-todo');
+  showElement('#edit-todo');
+  setOpenAttribute('#forms-container details', true);
 }
 
 function updateTodo(id, data) {
   projects[activeProject].findById(data.todoId).update(data);
   messager.postChanged(projects[activeProject]);
+  showElement('#create-todo');
+  hideElement('#edit-todo');
+  setOpenAttribute('#forms-container details', false);
 }
 
 function createSubscriptions() {

@@ -19,43 +19,53 @@
       </ul>
     </section>
     <section>
-      <form id="create-project">
-        <label for="project-name" class="section-header">Create a new project</label>
-        <input type="text" name="project-name" placeholder="Project name">
-        <input type="submit" value="Create project">
-      </form>
+      <details>
+        <summary>
+          Create a new project
+        </summary>
+        <form id="create-project">
+          <input type="text" name="project-name" placeholder="Project name">
+          <input type="submit" value="Create project">
+        </form>
+      </details>
     </section>
     <section id="forms-container">
-      <div class="section-header">Add a new task</div>
-      <form id="create-todo">
-        <label for="todo-title">Title</label>
-        <input name="todo-title" type="text">
-        <label for="todo-description">Description</label>
-        <input name="todo-description" type="text">
-        <label for="todo-due-date">Due date</label>
-        <input name="todo-due-date" type="date">
-        <label for="todo-priority">Priority</label>
-        <input name="todo-priority" type="text">
-        <div>
-          <label for="todo-completed">Completed</label>
-          <input name="todo-completed" type="checkbox">
-        </div>
-        <input type="submit" value="Create todo">
-      </form>
-      <form id="edit-todo" class="hide">
-        <input name="todo-id" id="edit-id" type="hidden">
-        <label for="todo-title">Edit Title</label>
-        <input name="todo-title" id="edit-title" type="text">
-        <label for="todo-description">Edit Description</label>
-        <input name="todo-description" id="edit-description" type="text">
-        <label for="todo-due-date">Edit Due date</label>
-        <input name="todo-due-date" id="edit-due-date" type="date">
-        <label for="todo-priority">Edit Priority</label>
-        <input name="todo-priority" id="edit-priority" type="text">
-        <label for="todo-completed">Edit Completed</label>
-        <input name="todo-completed" id="edit-completed" type="checkbox">
-        <input type="submit" value="Edit todo">
-      </form>
+      <details>
+        <summary>
+          Add/edit task
+        </summary>
+        <form id="create-todo">
+          <label for="todo-title">Title</label>
+          <input name="todo-title" type="text">
+          <label for="todo-description">Description</label>
+          <input name="todo-description" type="text">
+          <label for="todo-due-date">Due date</label>
+          <input name="todo-due-date" type="date">
+          <label for="todo-priority">Priority</label>
+          <input name="todo-priority" type="text">
+          <div>
+            <label for="todo-completed">Completed</label>
+            <input name="todo-completed" type="checkbox">
+          </div>
+          <input type="submit" value="Create todo">
+        </form>
+        <form id="edit-todo" class="hide">
+          <input name="todo-id" id="edit-id" type="hidden">
+          <label for="todo-title">Edit Title</label>
+          <input name="todo-title" id="edit-title" type="text">
+          <label for="todo-description">Edit Description</label>
+          <input name="todo-description" id="edit-description" type="text">
+          <label for="todo-due-date">Edit Due date</label>
+          <input name="todo-due-date" id="edit-due-date" type="date">
+          <label for="todo-priority">Edit Priority</label>
+          <input name="todo-priority" id="edit-priority" type="text">
+          <div>
+            <label for="todo-completed">Edit Completed</label>
+            <input name="todo-completed" id="edit-completed" type="checkbox">
+          </div>
+          <input type="submit" value="Edit todo">
+        </form>
+      </details>
     </section>
     <section id="project-container"></section>
   </main>
