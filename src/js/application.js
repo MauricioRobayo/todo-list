@@ -1,11 +1,15 @@
+import {
+  showElement,
+  hideElement,
+  DEFAULT_PROJECT_NAME,
+  APPLICATION_ID,
+} from './globals';
+
 import Project from './project';
 import DomProject from './dom-project';
 import * as messager from './messager';
 import { setupForms, fillEditForm } from './forms-manager';
 import setupProjectsList from './projects-list';
-
-const DEFAULT_PROJECT_NAME = 'default';
-const APPLICATION_ID = 'main';
 
 const domProject = new DomProject();
 const projects = {};
@@ -13,13 +17,6 @@ let activeProject = DEFAULT_PROJECT_NAME;
 
 function setOpenAttribute(querySelector, state) {
   document.querySelector(querySelector).open = state;
-}
-
-function hideElement(querySelector) {
-  document.querySelector(querySelector).classList.add('hide');
-}
-function showElement(querySelector) {
-  document.querySelector(querySelector).classList.remove('hide');
 }
 
 function createProject(id, { projectName: name }) {

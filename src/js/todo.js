@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-const priorities = ['low', 'medium', 'high'];
+import * as global from './globals';
+
 let sequentialId = 0;
 
 export default class Todo {
@@ -78,12 +79,12 @@ export default class Todo {
 
   set priority(newPriority) {
     const value = newPriority.toLowerCase();
-    this._priority = priorities.includes(value)
-      ? priorities.indexOf(value)
+    this._priority = global.PRIORITIES.includes(value)
+      ? global.PRIORITIES.indexOf(value)
       : 0;
   }
 
   get priority() {
-    return priorities[this._priority];
+    return global.PRIORITIES[this._priority];
   }
 }
