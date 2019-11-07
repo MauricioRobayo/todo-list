@@ -15,7 +15,7 @@ export default class Project {
   }
 
   saveToLocalStorage() {
-    localStorage[`osma-tlp-${this.name}`] = this.count ? JSON.stringify(Object.values(this.todos).map((todo) => todo.json)) : '[]';
+    localStorage[`osma-tlp-${this.name}`] = this.count ? JSON.stringify(Object.values(this.todos).map(todo => todo.json)) : '[]';
   }
 
   static getFromLocalStorage(projectName) {

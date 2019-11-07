@@ -69,7 +69,7 @@ function createSubscriptions() {
 
 function getProjectsFromLocalStorage() {
   const localData = { ...localStorage };
-  const projectsKeys = Object.keys(localData).filter((key) => key.startsWith('osma-tlp-'));
+  const projectsKeys = Object.keys(localData).filter(key => key.startsWith('osma-tlp-'));
   projectsKeys.forEach((projectKey) => {
     const projectName = projectKey.replace('osma-tlp-', '');
     projects[projectName] = Project.getFromLocalStorage(projectName);
