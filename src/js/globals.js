@@ -21,4 +21,24 @@ function toggleClass(reference, newClass, classes = []) {
   element.classList.add(newClass);
 }
 
-export { hideElement, showElement, toggleClass };
+function createElement(type, props = {}) {
+  const elem = document.createElement(type);
+  Object.keys(props).forEach((key) => {
+    switch (key) {
+      case 'classList':
+        elem.classList.add(...props[key]);
+        break;
+
+      default:
+        elem[key] = props[key];
+    }
+  });
+  return elem;
+}
+
+export {
+  hideElement,
+  showElement,
+  toggleClass,
+  createElement,
+};
