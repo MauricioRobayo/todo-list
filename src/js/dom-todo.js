@@ -60,7 +60,6 @@ export default class DomTodo {
         completed: event.target.checked,
       });
     });
-
   }
 
   appendTo(container) {
