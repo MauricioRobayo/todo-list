@@ -5,17 +5,22 @@ let sequentialId = 0;
 
 export default class Todo {
   constructor(values) {
+    this._title = '';
+    this._description = '';
+    this._dueDate = null;
+    this._priority = 0;
+    this._completed = false;
     this.update(values);
     this.id = sequentialId;
     sequentialId += 1;
   }
 
   update({
-    title,
-    description = '',
-    dueDate = null,
-    priority = 0,
-    completed = false,
+    title = this.title,
+    description = this.description,
+    dueDate = this.dueDate,
+    priority = this.priority,
+    completed = this.completed,
   }) {
     this.title = title;
     this.description = description;
