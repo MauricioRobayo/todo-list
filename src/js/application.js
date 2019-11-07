@@ -1,6 +1,7 @@
 import {
   showElement,
   hideElement,
+  setOpenAttribute,
   DEFAULT_PROJECT_NAME,
   APPLICATION_ID,
 } from './globals';
@@ -14,10 +15,6 @@ import setupProjectsList from './projects-list';
 const domProject = new DomProject();
 const projects = {};
 let activeProject = DEFAULT_PROJECT_NAME;
-
-function setOpenAttribute(querySelector, state) {
-  document.querySelector(querySelector).open = state;
-}
 
 function createProject(id, { projectName: name }) {
   if (projects[name]) {

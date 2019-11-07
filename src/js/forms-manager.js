@@ -1,4 +1,29 @@
+/* eslint-disable no-param-reassign */
+import { setOpenAttribute } from './globals';
 import * as messager from './messager';
+
+function clearForm(formSelector) {
+  document
+    .querySelector(formSelector)
+    .querySelectorAll('input, select')
+    .forEach((elem) => {
+      switch (elem.tagName) {
+        case 'SELECT':
+          elem.selectedIndex = 0;
+          break;
+        default:
+          switch (elem.type) {
+            case 'checkbox':
+              elem.checked = false;
+              break;
+            case 'submit':
+              break;
+            default:
+              elem.value = '';
+          }
+      }
+    });
+}
 
 function createProject(event) {
   event.preventDefault();
@@ -23,6 +48,8 @@ function createTodo(event) {
     priority,
     completed,
   });
+  clearForm('#create-todo');
+  setOpenAttribute('#forms-container details', false);
 }
 
 function updateTodo(event) {

@@ -11,6 +11,10 @@ function showElement(querySelector) {
   qry(querySelector).classList.remove('hide');
 }
 
+function setOpenAttribute(querySelector, state) {
+  document.querySelector(querySelector).open = state;
+}
+
 function toggleClass(reference, newClass, classes = []) {
   const element = (typeof reference === 'string') ? qry(reference) : reference;
   classes.forEach((cls) => {
@@ -39,6 +43,7 @@ function createElement(type, props = {}) {
 export {
   hideElement,
   showElement,
+  setOpenAttribute,
   toggleClass,
   createElement,
 };
