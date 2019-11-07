@@ -5,7 +5,7 @@ linters:
 
 files:
   ignore:
-    - dist
+    - dist/*
     - .eslintrc.js
     - webpack.config.js
 
