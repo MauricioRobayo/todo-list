@@ -8,4 +8,4 @@ JavaScript based TODO list. It uses messages to communicate between UI elements 
 - [Oscar Nava](https://github.com/oscarnava)
 - [Mauricio Robayo](https://github.com/MauricioRobayo)
 
-### [Live preview](https://raw.githack.com/MauricioRobayo/todo-list/todo-list/dist/index.html)
+### [Live preview](https://mauriciorobayo.github.io/todo-list)
